@@ -43,16 +43,9 @@ export function middleware(req: NextRequest) {
         }
     }
 
-    return new NextResponse(
-        "Authentication required — this site is in client preview.",
-        {
-            status: 401,
-            headers: {
-                "WWW-Authenticate":
-                    'Basic realm="The Blooming Tini — Preview", charset="UTF-8"',
-            },
-        }
-    );
+    const res = new NextResponse("Authentication required", { status: 401 });
+    res.headers.set("WWW-Authenticate", 'Basic realm="Preview"');
+    return res;
 }
 
 export const config = {
