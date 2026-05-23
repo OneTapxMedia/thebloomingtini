@@ -113,7 +113,6 @@ export default function RootLayout({
       className={`${playfair.variable} ${dmSans.variable} ${corinthia.variable}`}
     >
       <head>
-        <link rel="icon" href="/favicon.ico" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
