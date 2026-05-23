@@ -40,7 +40,9 @@ export default function MobileMenu({ isOpen, onClose, items, currentPath }: Mobi
                     <div className="absolute inset-0 bg-gradient-to-b from-cream via-cream/85 to-cream" />
 
                     {/* Content */}
-                    <div className="relative h-full flex flex-col pt-24 pb-32 overflow-y-auto">
+                    <div className="relative h-full flex flex-col pt-24 overflow-y-auto overscroll-contain"
+                        style={{ paddingBottom: "calc(13rem + env(safe-area-inset-bottom))" }}
+                    >
                         <div className="container mx-auto px-6 flex-1">
                             <motion.div
                                 initial={{ opacity: 0, y: -10 }}
@@ -181,12 +183,13 @@ export default function MobileMenu({ isOpen, onClose, items, currentPath }: Mobi
                             </nav>
                         </div>
 
-                        {/* Sticky CTA bar at bottom */}
+                        {/* Locked CTA bar — fixed to viewport bottom, doesn't scroll with content */}
                         <motion.div
-                            initial={{ opacity: 0, y: 30 }}
+                            initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4 }}
-                            className="sticky bottom-0 left-0 right-0 px-6 pb-6 pt-4 bg-gradient-to-t from-cream via-cream/95 to-transparent"
+                            className="fixed bottom-0 left-0 right-0 z-50 px-6 pt-5 bg-gradient-to-t from-cream via-cream/95 to-cream/0 backdrop-blur-md"
+                            style={{ paddingBottom: "calc(1.25rem + env(safe-area-inset-bottom))" }}
                         >
                             <div className="space-y-3">
                                 <Link href="/contact" onClick={onClose} className="btn btn-primary w-full">

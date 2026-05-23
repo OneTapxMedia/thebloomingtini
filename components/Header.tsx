@@ -82,7 +82,7 @@ export default function Header() {
             </div>
 
             {/* Gradient scrim behind nav when over hero */}
-            {!isScrolled && (
+            {!isScrolled && !isOpen && (
                 <div
                     aria-hidden="true"
                     className="hidden md:block pointer-events-none fixed left-0 right-0 top-0 h-36 z-40"
@@ -92,7 +92,7 @@ export default function Header() {
                     }}
                 />
             )}
-            {!isScrolled && (
+            {!isScrolled && !isOpen && (
                 <div
                     aria-hidden="true"
                     className="md:hidden pointer-events-none fixed left-0 right-0 top-0 h-32 z-40"
@@ -113,13 +113,13 @@ export default function Header() {
                 <div className="container mx-auto px-6">
                     <nav className="flex items-center justify-between">
                         {/* Logo */}
-                        <Link href="/" className="flex items-center gap-3 group relative z-10" aria-label="The Blooming Tini — Home">
+                        <Link href="/" className="flex items-center gap-2.5 sm:gap-3 group relative z-10 min-w-0" aria-label="The Blooming Tini — Home">
                             <div className={`relative transition-all duration-300 overflow-hidden rounded-full flex-shrink-0 ${isScrolled
-                                ? "w-[52px] h-[52px] md:w-[56px] md:h-[56px]"
-                                : "w-[64px] h-[64px] md:w-[72px] md:h-[72px] shadow-lg ring-1 ring-white/20"
+                                ? "w-[46px] h-[46px] md:w-[56px] md:h-[56px]"
+                                : "w-[54px] h-[54px] md:w-[72px] md:h-[72px] shadow-lg ring-1 ring-white/20"
                                 }`}>
                                 <Image
-                                    src="/logo-v2.png"
+                                    src="/logo-circular.png"
                                     alt="The Blooming Tini"
                                     fill
                                     priority
@@ -127,17 +127,17 @@ export default function Header() {
                                     className="object-cover"
                                 />
                             </div>
-                            <div className="leading-tight hidden sm:block">
+                            <div className="leading-tight min-w-0">
                                 <span
-                                    className={`block font-heading font-semibold tracking-tight transition-all ${isScrolled
-                                        ? "text-base md:text-lg text-dark"
-                                        : "text-lg md:text-xl text-white"
+                                    className={`block font-heading font-semibold tracking-tight transition-all truncate ${(isScrolled || isOpen)
+                                        ? "text-sm md:text-lg text-dark"
+                                        : "text-base md:text-xl text-white"
                                         }`}
                                 >
                                     The Blooming Tini
                                 </span>
                                 <span
-                                    className={`block text-[9px] md:text-[10px] uppercase tracking-[0.3em] mt-0.5 transition-colors ${isScrolled ? "text-pink" : "text-pink-light"
+                                    className={`block text-[8px] md:text-[10px] uppercase tracking-[0.25em] md:tracking-[0.3em] mt-0.5 transition-colors truncate ${(isScrolled || isOpen) ? "text-pink" : "text-pink-light"
                                         }`}
                                 >
                                     Mobile Bar Co.
@@ -155,7 +155,7 @@ export default function Header() {
                                             key={item.href}
                                             href={item.href}
                                             onMouseEnter={() => setActiveMega(null)}
-                                            className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-pink ${isScrolled ? "text-dark" : "text-white"
+                                            className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-pink ${(isScrolled || isOpen) ? "text-dark" : "text-white"
                                                 }`}
                                         >
                                             {item.label}
@@ -179,7 +179,7 @@ export default function Header() {
                                     >
                                         <Link
                                             href={item.href}
-                                            className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-pink flex items-center gap-1 ${isScrolled ? "text-dark" : "text-white"
+                                            className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-pink flex items-center gap-1 ${(isScrolled || isOpen) ? "text-dark" : "text-white"
                                                 } ${isActive ? "text-pink" : ""}`}
                                             aria-expanded={isActive}
                                         >

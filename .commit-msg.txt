@@ -1,0 +1,17 @@
+Logo + OG + favicon + mobile menu polish
+
+- Logo now properly circular everywhere (PNG-level alpha mask, not just CSS clip)
+- New circular favicon (app/icon.png) + apple-touch-icon (app/apple-icon.png)
+- New OG image (app/opengraph-image.png, 1200x630) with circular logo
+  on cream/floral backdrop + bold brand wordmark + tagline + cert line
+- Twitter card image (app/twitter-image.png) matches OG
+- Brand text "The Blooming Tini / MOBILE BAR CO." now visible on mobile header
+- Mobile menu sticky CTA bar locked to viewport bottom (fixed positioning)
+  with cream gradient + backdrop blur; menu items get 13rem bottom padding
+  so they're never hidden behind the bar
+- Header text/logo/burger adapt to "scrolled" styling when mobile menu is
+  open so they stay readable against the cream menu background
+- Dark scrim under nav hidden when menu open
+- Removed old dynamic opengraph-image.tsx (PNG takes precedence anyway)
+
+Co-Authored-By: Claude Opus 4.7 <noreply@anthropic.com>

@@ -70,7 +70,7 @@ export default function Footer() {
                         <Link href="/" className="inline-flex items-center gap-4 mb-5 group" aria-label="The Blooming Tini — Home">
                             <div className="relative w-[80px] h-[80px] rounded-full overflow-hidden shadow-lg ring-1 ring-white/15">
                                 <Image
-                                    src="/logo-v2.png"
+                                    src="/logo-circular.png"
                                     alt="The Blooming Tini"
                                     fill
                                     sizes="80px"
