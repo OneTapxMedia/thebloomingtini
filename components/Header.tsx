@@ -106,8 +106,10 @@ export default function Header() {
             <header
                 onMouseLeave={scheduleCloseMega}
                 className={`fixed left-0 right-0 z-50 transition-all duration-500 md:top-[28px] top-0 ${isScrolled
-                    ? "bg-white/95 backdrop-blur-xl shadow-sm py-2.5 md:top-0"
-                    : "bg-transparent py-4"
+                    ? "bg-cream shadow-md border-b border-pink/15 py-2.5 md:top-0"
+                    : isOpen
+                        ? "bg-cream py-3"
+                        : "bg-transparent py-4"
                     }`}
             >
                 <div className="container mx-auto px-6">
