@@ -3,6 +3,7 @@
 import Hero from "@/components/Hero";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { IMG } from "@/lib/images";
 
 const values = [
     {
@@ -31,9 +32,10 @@ export default function AboutPage() {
     return (
         <>
             <Hero
-                title="Our Story"
+                title="Two moms, one big dream"
                 subtitle="About Us"
-                description="A sister-and-friend duo with a shared passion for celebrations and craft cocktails."
+                description="Two moms chasing a dream — building the Bloom Bar side by side, one celebration at a time."
+                backgroundImage={IMG.bloomBar}
                 height="medium"
             />
 
@@ -46,19 +48,19 @@ export default function AboutPage() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <span className="text-pink font-accent text-2xl">From Friends to Founders</span>
+                            <span className="text-pink font-accent text-2xl">Two moms, one big dream</span>
                             <h2 className="mt-2 mb-6">
-                                Where It All <span className="text-pink">Began</span>
+                                Where it all <span className="text-pink">began</span>
                             </h2>
                             <div className="space-y-4 text-muted leading-relaxed">
                                 <p>
-                                    What started as a love for hosting friends and family has blossomed into The Blooming Tini — a mobile bartending service built on the belief that every celebration deserves to be special.
+                                    Two moms chasing a dream — building this side by side. The Blooming Tini started over late-night conversations about hospitality, motherhood, and how every celebration deserves more than a standard cocktail hour.
                                 </p>
                                 <p>
-                                    We&apos;re a sister-and-friend duo based in Bensalem, PA, and we&apos;ve combined our hospitality backgrounds and passion for mixology to create memorable bar experiences for events of all sizes.
+                                    Based in Bensalem, PA, we built the <strong className="text-pink-dark">Bloom Bar</strong> with our own hands — a mobile bar that's as much a part of your event styling as your floral arch. From the custom labels on every cup to the hand-picked garnishes from our garden, every detail is intentional.
                                 </p>
                                 <p>
-                                    From our first backyard party to weddings with hundreds of guests, we&apos;ve learned that what people remember most isn&apos;t just the drinks — it&apos;s the feeling. The laughter, the toasts, the moments that bring people together. That&apos;s what we&apos;re really here to serve.
+                                    We've poured for weddings, baby showers, Pilates socials, and intimate backyard celebrations. What people remember isn't just the drinks — it's how the bar made them feel. Indulgent. Intentional. Designed to be remembered.
                                 </p>
                             </div>
                         </motion.div>
@@ -68,12 +70,12 @@ export default function AboutPage() {
                             viewport={{ once: true }}
                             className="relative"
                         >
-                            <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-rose/20 to-forest/20 flex items-center justify-center">
-                                <div className="text-center p-8">
-                                    <span className="text-6xl mb-4 block">👩‍👩‍👧</span>
-                                    <p className="text-pink font-heading text-xl">Photo Placeholder</p>
-                                    <p className="text-muted text-sm">Founders photo coming soon</p>
-                                </div>
+                            <div className="aspect-[4/5] rounded-2xl overflow-hidden relative shadow-2xl">
+                                <img
+                                    src={IMG.whyUs}
+                                    alt="The Blooming Tini founders crafting cocktails"
+                                    className="w-full h-full object-cover"
+                                />
                             </div>
                             <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gold/20 rounded-2xl -z-10" />
                         </motion.div>
@@ -121,21 +123,21 @@ export default function AboutPage() {
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                             <div className="bg-white/10 rounded-xl p-6">
                                 <div className="text-3xl mb-3">📋</div>
-                                <h4 className="text-gold font-semibold mb-2">RAMP Certified</h4>
+                                <h4 className="text-white font-heading text-lg mb-2">RAMP Certified</h4>
                                 <p className="text-white/70 text-sm">
                                     PA Responsible Alcohol Management Program certified bartenders
                                 </p>
                             </div>
                             <div className="bg-white/10 rounded-xl p-6">
                                 <div className="text-3xl mb-3">🛡️</div>
-                                <h4 className="text-gold font-semibold mb-2">Fully Insured</h4>
+                                <h4 className="text-white font-heading text-lg mb-2">Fully Insured</h4>
                                 <p className="text-white/70 text-sm">
                                     General liability and liquor liability coverage for peace of mind
                                 </p>
                             </div>
                             <div className="bg-white/10 rounded-xl p-6">
                                 <div className="text-3xl mb-3">✅</div>
-                                <h4 className="text-gold font-semibold mb-2">Licensed</h4>
+                                <h4 className="text-white font-heading text-lg mb-2">Licensed</h4>
                                 <p className="text-white/70 text-sm">
                                     Properly licensed to serve in Pennsylvania and New Jersey
                                 </p>

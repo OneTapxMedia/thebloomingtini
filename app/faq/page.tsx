@@ -4,6 +4,7 @@ import { useState } from "react";
 import Hero from "@/components/Hero";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { IMG } from "@/lib/images";
 
 const faqs = [
     {
@@ -103,6 +104,7 @@ export default function FAQPage() {
                 title="FAQ"
                 subtitle="Questions?"
                 description="Everything you need to know about booking mobile bartending for your event."
+                backgroundImage={IMG.garnishDetail}
                 height="medium"
             />
 

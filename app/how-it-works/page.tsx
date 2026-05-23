@@ -1,6 +1,7 @@
 "use client";
 
 import Hero from "@/components/Hero";
+import { IMG } from "@/lib/images";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -58,6 +59,7 @@ export default function HowItWorksPage() {
                 title="How It Works"
                 subtitle="The Process"
                 description="From first contact to last call, here's what to expect when you book The Blooming Tini."
+                backgroundImage={IMG.glassware}
                 height="medium"
             />
 
@@ -140,21 +142,21 @@ export default function HowItWorksPage() {
                         <div className="grid md:grid-cols-3 gap-8 text-left">
                             <div className="text-center">
                                 <div className="text-4xl mb-3">⏰</div>
-                                <h4 className="text-gold font-semibold mb-2">Early Arrival</h4>
+                                <h4 className="text-white font-heading text-lg mb-2">Early Arrival</h4>
                                 <p className="text-white/70 text-sm">
                                     We arrive 1-2 hours before service to set up our beautiful bar display.
                                 </p>
                             </div>
                             <div className="text-center">
                                 <div className="text-4xl mb-3">🍸</div>
-                                <h4 className="text-gold font-semibold mb-2">Seamless Service</h4>
+                                <h4 className="text-white font-heading text-lg mb-2">Seamless Service</h4>
                                 <p className="text-white/70 text-sm">
                                     Professional, friendly bartenders keep drinks flowing and guests happy.
                                 </p>
                             </div>
                             <div className="text-center">
                                 <div className="text-4xl mb-3">✨</div>
-                                <h4 className="text-gold font-semibold mb-2">Clean Departure</h4>
+                                <h4 className="text-white font-heading text-lg mb-2">Clean Departure</h4>
                                 <p className="text-white/70 text-sm">
                                     We pack up and leave your space spotless — like we were never there.
                                 </p>
@@ -172,7 +174,7 @@ export default function HowItWorksPage() {
                         Let&apos;s begin planning your perfect bar experience.
                     </p>
                     <Link href="/contact" className="btn btn-primary">
-                        Get a Quote
+                        Plan Your Event
                     </Link>
                 </div>
             </section>

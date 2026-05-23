@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
 import Link from "next/link";
+import { IMG } from "@/lib/images";
 
 export const metadata: Metadata = {
     title: "Services | The Blooming Tini",
@@ -103,6 +104,7 @@ export default function ServicesPage() {
                 title="Our Services"
                 subtitle="What We Offer"
                 description="Professional mobile bartending for every celebration. We bring the bar to you with style, expertise, and a personal touch."
+                backgroundImage={IMG.weddingTable}
                 height="medium"
             />
 
@@ -164,7 +166,7 @@ export default function ServicesPage() {
                             What is &quot;Dry Hire&quot;?
                         </h3>
                         <p className="text-white/80 leading-relaxed mb-6">
-                            We operate on a &quot;dry hire&quot; basis, which means <strong className="text-gold">you provide the alcohol</strong> and we provide everything else. This gives you complete control over your beverage selection and budget while ensuring you get professional, licensed bartending service.
+                            We operate on a &quot;dry hire&quot; basis, which means <strong className="text-white underline decoration-cream/60 underline-offset-4">you provide the alcohol</strong> and we provide everything else. This gives you complete control over your beverage selection and budget while ensuring you get professional, licensed bartending service.
                         </p>
                         <p className="text-white/60 text-sm">
                             Don&apos;t worry — we&apos;ll help you calculate exactly how much you need based on your guest count and event duration!
@@ -181,7 +183,7 @@ export default function ServicesPage() {
                         Tell us about your event and let&apos;s create something special together.
                     </p>
                     <Link href="/contact" className="btn btn-primary">
-                        Get a Quote
+                        Reserve Your Date
                     </Link>
                 </div>
             </section>

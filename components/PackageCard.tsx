@@ -28,7 +28,7 @@ export default function PackageCard({
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.15 }}
             className={`relative rounded-3xl p-8 ${popular
-                    ? "bg-pink text-white shadow-2xl scale-105 z-10"
+                    ? "bg-pink-dark text-white shadow-2xl scale-105 z-10"
                     : "bg-white text-dark shadow-lg"
                 }`}
         >

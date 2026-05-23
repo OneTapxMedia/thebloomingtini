@@ -1,152 +1,269 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-
-const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/services", label: "Services" },
-    { href: "/packages", label: "Packages" },
-    { href: "/how-it-works", label: "How It Works" },
-    { href: "/gallery", label: "Gallery" },
-    { href: "/about", label: "About" },
-    { href: "/faq", label: "FAQ" },
-];
+import { usePathname } from "next/navigation";
+import { NAV } from "@/lib/nav";
+import MegaMenu from "./MegaMenu";
+import MobileMenu from "./MobileMenu";
 
 export default function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [activeMega, setActiveMega] = useState<number | null>(null);
+    const closeTimer = useRef<number | null>(null);
+    const pathname = usePathname();
 
     useEffect(() => {
         const handleScroll = () => {
-            setIsScrolled(window.scrollY > 50);
+            setIsScrolled(window.scrollY > 40);
         };
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener("scroll", handleScroll, { passive: true });
+        handleScroll();
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    useEffect(() => {
+        setIsOpen(false);
+        setActiveMega(null);
+    }, [pathname]);
+
+    useEffect(() => {
+        document.body.style.overflow = isOpen ? "hidden" : "";
+        return () => {
+            document.body.style.overflow = "";
+        };
+    }, [isOpen]);
+
+    const openMega = (idx: number) => {
+        if (closeTimer.current) {
+            clearTimeout(closeTimer.current);
+            closeTimer.current = null;
+        }
+        setActiveMega(idx);
+    };
+
+    const scheduleCloseMega = () => {
+        if (closeTimer.current) clearTimeout(closeTimer.current);
+        closeTimer.current = window.setTimeout(() => {
+            setActiveMega(null);
+        }, 120);
+    };
+
+    const cancelClose = () => {
+        if (closeTimer.current) {
+            clearTimeout(closeTimer.current);
+            closeTimer.current = null;
+        }
+    };
+
+    const currentMega = activeMega !== null ? NAV[activeMega] : null;
+
     return (
-        <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-                    ? "bg-white/95 backdrop-blur-md shadow-sm py-3"
-                    : "bg-transparent py-5"
-                }`}
-        >
-            <div className="container mx-auto px-6">
-                <nav className="flex items-center justify-between">
-                    {/* Logo */}
-                    <Link href="/" className="flex items-center gap-2 group">
-                        <span className="text-2xl">🌸</span>
-                        <div>
-                            <span
-                                className={`text-xl font-heading font-semibold transition-colors ${isScrolled ? "text-dark" : "text-white"
-                                    }`}
-                            >
-                                The Blooming Tini
-                            </span>
-                        </div>
-                    </Link>
-
-                    {/* Desktop Navigation */}
-                    <div className="hidden lg:flex items-center gap-8">
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.href}
-                                href={link.href}
-                                className={`text-sm font-medium transition-colors hover:text-pink ${isScrolled ? "text-dark" : "text-white"
-                                    }`}
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                        <Link href="/contact" className="btn btn-primary text-sm">
-                            Get a Quote
-                        </Link>
-                    </div>
-
-                    {/* Mobile Menu Button */}
-                    <button
-                        className="lg:hidden relative z-50 w-10 h-10 flex items-center justify-center"
-                        onClick={() => setIsOpen(!isOpen)}
-                        aria-label="Toggle menu"
+        <>
+            {/* Top utility bar */}
+            <div className="hidden md:block fixed top-0 left-0 right-0 z-50 bg-dark text-white/90 text-xs py-1.5">
+                <div className="container mx-auto px-6 flex items-center justify-between">
+                    <span className="flex items-center gap-2">
+                        <span className="text-gold">✦</span>
+                        Licensed · Insured · RAMP Certified · Bensalem, PA
+                    </span>
+                    <a
+                        href="https://instagram.com/thebloomingtini"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-pink-light transition-colors"
                     >
-                        <div className="flex flex-col gap-1.5">
-                            <span
-                                className={`block w-6 h-0.5 transition-all duration-300 ${isOpen
+                        @thebloomingtini
+                    </a>
+                </div>
+            </div>
+
+            {/* Gradient scrim behind nav when over hero */}
+            {!isScrolled && (
+                <div
+                    aria-hidden="true"
+                    className="hidden md:block pointer-events-none fixed left-0 right-0 top-0 h-36 z-40"
+                    style={{
+                        background:
+                            "linear-gradient(to bottom, rgba(20,20,20,0.75) 0%, rgba(20,20,20,0.45) 55%, rgba(20,20,20,0) 100%)",
+                    }}
+                />
+            )}
+            {!isScrolled && (
+                <div
+                    aria-hidden="true"
+                    className="md:hidden pointer-events-none fixed left-0 right-0 top-0 h-32 z-40"
+                    style={{
+                        background:
+                            "linear-gradient(to bottom, rgba(20,20,20,0.70) 0%, rgba(20,20,20,0.40) 60%, rgba(20,20,20,0) 100%)",
+                    }}
+                />
+            )}
+
+            <header
+                onMouseLeave={scheduleCloseMega}
+                className={`fixed left-0 right-0 z-50 transition-all duration-500 md:top-[28px] top-0 ${isScrolled
+                    ? "bg-white/95 backdrop-blur-xl shadow-sm py-2.5 md:top-0"
+                    : "bg-transparent py-4"
+                    }`}
+            >
+                <div className="container mx-auto px-6">
+                    <nav className="flex items-center justify-between">
+                        {/* Logo */}
+                        <Link href="/" className="flex items-center gap-3 group relative z-10" aria-label="The Blooming Tini — Home">
+                            <div className={`relative transition-all duration-300 overflow-hidden rounded-full flex-shrink-0 ${isScrolled
+                                ? "w-[52px] h-[52px] md:w-[56px] md:h-[56px]"
+                                : "w-[64px] h-[64px] md:w-[72px] md:h-[72px] shadow-lg ring-1 ring-white/20"
+                                }`}>
+                                <Image
+                                    src="/logo-v2.png"
+                                    alt="The Blooming Tini"
+                                    fill
+                                    priority
+                                    sizes="80px"
+                                    className="object-cover"
+                                />
+                            </div>
+                            <div className="leading-tight hidden sm:block">
+                                <span
+                                    className={`block font-heading font-semibold tracking-tight transition-all ${isScrolled
+                                        ? "text-base md:text-lg text-dark"
+                                        : "text-lg md:text-xl text-white"
+                                        }`}
+                                >
+                                    The Blooming Tini
+                                </span>
+                                <span
+                                    className={`block text-[9px] md:text-[10px] uppercase tracking-[0.3em] mt-0.5 transition-colors ${isScrolled ? "text-pink" : "text-pink-light"
+                                        }`}
+                                >
+                                    Mobile Bar Co.
+                                </span>
+                            </div>
+                        </Link>
+
+                        {/* Desktop Navigation */}
+                        <div className="hidden lg:flex items-center gap-1 h-full" onMouseEnter={cancelClose}>
+                            {NAV.map((item, idx) => {
+                                if (item.kind === "link") {
+                                    const active = pathname === item.href;
+                                    return (
+                                        <Link
+                                            key={item.href}
+                                            href={item.href}
+                                            onMouseEnter={() => setActiveMega(null)}
+                                            className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-pink ${isScrolled ? "text-dark" : "text-white"
+                                                }`}
+                                        >
+                                            {item.label}
+                                            {active && (
+                                                <motion.span
+                                                    layoutId="navUnderline"
+                                                    className="absolute -bottom-0.5 left-4 right-4 h-px bg-pink"
+                                                />
+                                            )}
+                                        </Link>
+                                    );
+                                }
+
+                                const isActive = activeMega === idx;
+                                const isCurrent = pathname.startsWith(item.href);
+                                return (
+                                    <div
+                                        key={item.label}
+                                        onMouseEnter={() => openMega(idx)}
+                                        className="relative"
+                                    >
+                                        <Link
+                                            href={item.href}
+                                            className={`relative px-4 py-2 text-sm font-medium transition-colors hover:text-pink flex items-center gap-1 ${isScrolled ? "text-dark" : "text-white"
+                                                } ${isActive ? "text-pink" : ""}`}
+                                            aria-expanded={isActive}
+                                        >
+                                            {item.label}
+                                            <motion.svg
+                                                animate={{ rotate: isActive ? 180 : 0 }}
+                                                transition={{ duration: 0.2 }}
+                                                className="w-3 h-3 opacity-60"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                            </motion.svg>
+                                            {isCurrent && (
+                                                <motion.span
+                                                    layoutId="navUnderline"
+                                                    className="absolute -bottom-0.5 left-4 right-4 h-px bg-pink"
+                                                />
+                                            )}
+                                        </Link>
+                                    </div>
+                                );
+                            })}
+                            <Link href="/contact" className="btn btn-primary text-sm py-2.5 px-5 ml-3">
+                                Plan Your Event
+                            </Link>
+                        </div>
+
+                        {/* Mobile Menu Button */}
+                        <button
+                            className="lg:hidden relative z-50 w-11 h-11 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm"
+                            onClick={() => setIsOpen(!isOpen)}
+                            aria-label="Toggle menu"
+                            aria-expanded={isOpen}
+                        >
+                            <div className="flex flex-col gap-1.5">
+                                <span
+                                    className={`block w-5 h-0.5 transition-all duration-300 ${isOpen
                                         ? "rotate-45 translate-y-2 bg-dark"
                                         : isScrolled
                                             ? "bg-dark"
                                             : "bg-white"
-                                    }`}
-                            />
-                            <span
-                                className={`block w-6 h-0.5 transition-all duration-300 ${isOpen
+                                        }`}
+                                />
+                                <span
+                                    className={`block w-5 h-0.5 transition-all duration-300 ${isOpen
                                         ? "opacity-0"
                                         : isScrolled
                                             ? "bg-dark"
                                             : "bg-white"
-                                    }`}
-                            />
-                            <span
-                                className={`block w-6 h-0.5 transition-all duration-300 ${isOpen
+                                        }`}
+                                />
+                                <span
+                                    className={`block w-5 h-0.5 transition-all duration-300 ${isOpen
                                         ? "-rotate-45 -translate-y-2 bg-dark"
                                         : isScrolled
                                             ? "bg-dark"
                                             : "bg-white"
-                                    }`}
-                            />
-                        </div>
-                    </button>
-                </nav>
-            </div>
-
-            {/* Mobile Menu */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="lg:hidden fixed inset-0 top-0 bg-cream z-40 pt-24"
-                    >
-                        <div className="container mx-auto px-6">
-                            <div className="flex flex-col gap-4">
-                                {navLinks.map((link, index) => (
-                                    <motion.div
-                                        key={link.href}
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: index * 0.1 }}
-                                    >
-                                        <Link
-                                            href={link.href}
-                                            className="block text-2xl font-heading text-dark py-2 hover:text-pink transition-colors"
-                                            onClick={() => setIsOpen(false)}
-                                        >
-                                            {link.label}
-                                        </Link>
-                                    </motion.div>
-                                ))}
-                                <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ delay: navLinks.length * 0.1 }}
-                                    className="pt-4"
-                                >
-                                    <Link
-                                        href="/contact"
-                                        className="btn btn-primary w-full"
-                                        onClick={() => setIsOpen(false)}
-                                    >
-                                        Get a Quote
-                                    </Link>
-                                </motion.div>
+                                        }`}
+                                />
                             </div>
-                        </div>
-                    </motion.div>
+                        </button>
+                    </nav>
+                </div>
+
+                {/* Desktop mega menu panel */}
+                {currentMega && currentMega.kind === "mega" && (
+                    <div
+                        onMouseEnter={cancelClose}
+                        onMouseLeave={scheduleCloseMega}
+                    >
+                        <MegaMenu item={currentMega} onClose={() => setActiveMega(null)} />
+                    </div>
                 )}
-            </AnimatePresence>
-        </header>
+            </header>
+
+            {/* Mobile menu */}
+            <MobileMenu
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                items={NAV}
+                currentPath={pathname}
+            />
+        </>
     );
 }

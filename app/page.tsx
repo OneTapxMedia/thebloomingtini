@@ -1,10 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Hero from "@/components/Hero";
 import ServiceCard from "@/components/ServiceCard";
-import TestimonialCard from "@/components/TestimonialCard";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
+import StatsSection from "@/components/StatsSection";
+import PressStrip from "@/components/PressStrip";
+import CocktailPreview from "@/components/CocktailPreview";
+import { IMG } from "@/lib/images";
 
 const services = [
   {
@@ -45,24 +50,6 @@ const services = [
   },
 ];
 
-const testimonials = [
-  {
-    quote: "The Blooming Tini made our wedding reception absolutely magical! Their attention to detail and beautiful presentation had all our guests raving.",
-    author: "Sarah & Michael",
-    role: "Wedding, October 2024",
-  },
-  {
-    quote: "Professional, punctual, and the cocktails were incredible. They elevated our corporate holiday party to a whole new level.",
-    author: "Jennifer R.",
-    role: "Corporate Event, December 2024",
-  },
-  {
-    quote: "From setup to cleanup, everything was handled flawlessly. The custom cocktail menu they created for my 40th was the highlight of the night!",
-    author: "David M.",
-    role: "Birthday Party, September 2024",
-  },
-];
-
 const eventTypes = [
   "Weddings",
   "Bridal Showers",
@@ -77,30 +64,32 @@ const eventTypes = [
 export default function Home() {
   return (
     <>
-      {/* Hero Section */}
       <Hero
         subtitle="Where Celebrations Bloom"
-        title="Mobile Bartending for Life's Best Moments"
+        title="Mobile bartending for life&rsquo;s best moments"
         description="From intimate gatherings to grand celebrations, we bring the bar to you — complete with handcrafted cocktails, professional service, and a touch of botanical elegance."
+        backgroundImage={IMG.heroPour}
         height="full"
       >
         <Link href="/contact" className="btn btn-gold">
-          Get a Quote
+          Plan Your Event
         </Link>
-        <Link href="/gallery" className="btn btn-secondary border-white text-white hover:bg-white hover:text-pink">
-          View Our Work
+        <Link href="/gallery" className="btn btn-ghost">
+          See Recent Pours
         </Link>
       </Hero>
 
+      <PressStrip />
+
       {/* Services Section */}
-      <section className="section bg-cream">
+      <section className="section bg-cream relative">
         <div className="container mx-auto px-6">
           <div className="text-center mb-16">
             <motion.span
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-pink font-accent text-2xl"
+              className="eyebrow"
             >
               Our Services
             </motion.span>
@@ -111,7 +100,7 @@ export default function Home() {
               transition={{ delay: 0.1 }}
               className="mt-2"
             >
-              Every Event Deserves a <span className="text-pink">Perfect Pour</span>
+              Every event deserves a <span className="gradient-text">perfect pour</span>
             </motion.h2>
           </div>
 
@@ -125,7 +114,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mt-12"
+            className="text-center mt-14"
           >
             <Link href="/services" className="btn btn-primary">
               View All Services
@@ -134,16 +123,64 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Event Types Banner */}
-      <section className="py-12 bg-pink overflow-hidden">
-        <div className="flex animate-marquee">
-          {[...eventTypes, ...eventTypes].map((event, index) => (
+      <CocktailPreview />
+
+      {/* Custom labels — their signature differentiator */}
+      <section className="section bg-mist">
+        <div className="container mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="order-2 lg:order-1"
+            >
+              <span className="eyebrow">The Signature Touch</span>
+              <h2 className="mt-2 mb-6">
+                Custom labels for <span className="gradient-text">every event</span>
+              </h2>
+              <p className="text-muted leading-relaxed mb-4">
+                Your couple&apos;s name. Your shower theme. Your brand. Every cup, every coupe — printed with the details that make the night yours.
+              </p>
+              <p className="text-muted leading-relaxed mb-6">
+                It&apos;s the kind of detail your guests will photograph, post, and remember. We notice the details so you don&apos;t have to.
+              </p>
+              <Link href="/contact" className="btn btn-primary">
+                Design your labels
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="order-1 lg:order-2 relative"
+            >
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+                <Image
+                  src={IMG.customLabeled}
+                  alt="Custom-labeled wedding cocktail with bride and groom initials"
+                  width={800}
+                  height={1000}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute -top-6 -left-6 w-32 h-32 bg-pink/20 rounded-3xl -z-10" />
+              <div className="absolute -bottom-8 -right-8 w-48 h-48 bg-gold/15 rounded-full -z-10" />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Event Types Marquee */}
+      <section className="py-10 bg-pink overflow-hidden border-y border-pink-dark/20">
+        <div className="flex animate-marquee whitespace-nowrap">
+          {[...eventTypes, ...eventTypes, ...eventTypes].map((event, index) => (
             <span
               key={index}
-              className="text-white/80 text-lg font-medium whitespace-nowrap mx-8 flex items-center gap-4"
+              className="text-white text-2xl md:text-3xl font-heading mx-6 flex items-center gap-6"
             >
               {event}
-              <span className="text-pink">✿</span>
+              <span className="text-white/60">✦</span>
             </span>
           ))}
         </div>
@@ -158,20 +195,20 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="text-pink font-accent text-2xl">Why Choose Us</span>
+              <span className="eyebrow">Why Choose Us</span>
               <h2 className="mt-2 mb-6">
-                More Than Just <span className="text-pink">Bartending</span>
+                More than just <span className="gradient-text">bartending</span>
               </h2>
               <p className="text-muted leading-relaxed mb-8">
-                We&apos;re a sister-and-friend duo who believe every celebration deserves to bloom. Based in Bensalem, PA, we bring licensed, insured, and RAMP-certified bartending services to the greater Philadelphia area.
+                We&apos;re two moms chasing a dream, building this side by side. Every detail is customized — from the menu to the custom-labeled cups — and the Bloom Bar is our pride and joy. Based in Bensalem, PA, serving the greater Philadelphia and South Jersey area.
               </p>
 
               <div className="space-y-6">
                 {[
                   { title: "Licensed & Insured", desc: "Full liability and liquor liability coverage for your peace of mind" },
-                  { title: "Custom Cocktail Menus", desc: "Signature drinks tailored to your event's theme and preferences" },
+                  { title: "Custom Cocktail Menus", desc: "Signature drinks tailored to your event's theme, palette, and palate" },
                   { title: "Full Bar Setup", desc: "We bring everything except the alcohol — glassware, ice, garnishes, and more" },
-                  { title: "Professional Service", desc: "RAMP-certified bartenders who know how to make your guests feel special" },
+                  { title: "RAMP Certified Service", desc: "Bartenders trained in responsible service who know how to make guests feel cared for" },
                 ].map((item, index) => (
                   <motion.div
                     key={item.title}
@@ -188,7 +225,7 @@ export default function Home() {
                     </div>
                     <div>
                       <h4 className="font-semibold text-dark">{item.title}</h4>
-                      <p className="text-sm text-muted">{item.desc}</p>
+                      <p className="text-sm text-muted leading-relaxed">{item.desc}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -201,58 +238,57 @@ export default function Home() {
               viewport={{ once: true }}
               className="relative"
             >
-              <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-rose/20 to-gold/20 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <span className="text-6xl mb-4 block">🍸</span>
-                  <p className="text-pink font-heading text-xl">Photo Placeholder</p>
-                  <p className="text-muted text-sm">Bar setup image coming soon</p>
-                </div>
+              <div className="aspect-[4/5] rounded-3xl overflow-hidden shadow-2xl">
+                <Image
+                  src={IMG.whyUs}
+                  alt="Bartender preparing a craft cocktail"
+                  width={800}
+                  height={1000}
+                  className="w-full h-full object-cover"
+                />
               </div>
-              {/* Decorative Element */}
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-pink/10 rounded-2xl -z-10" />
-              <div className="absolute -top-6 -left-6 w-24 h-24 bg-pink/10 rounded-full -z-10" />
+              {/* Floating accent card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+                className="absolute -bottom-6 -left-6 bg-white rounded-2xl p-5 shadow-xl max-w-[240px] hidden md:block"
+              >
+                <div className="flex gap-1 text-gold mb-2">
+                  {[...Array(5)].map((_, i) => (
+                    <svg key={i} className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-sm text-dark/80 leading-snug">
+                  &ldquo;Truly the most beautiful bar I&rsquo;ve ever seen at a wedding.&rdquo;
+                </p>
+              </motion.div>
+              <div className="absolute -top-6 -right-6 w-32 h-32 bg-pink/10 rounded-full -z-10" />
+              <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-gold/10 rounded-3xl -z-10" />
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="section bg-cream-dark">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-pink font-accent text-2xl"
-            >
-              Testimonials
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="mt-2"
-            >
-              What Our Clients <span className="text-pink">Say</span>
-            </motion.h2>
-          </div>
+      <StatsSection />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <TestimonialCard key={index} {...testimonial} index={index} />
-            ))}
-          </div>
-        </div>
-      </section>
+      <TestimonialCarousel />
 
       {/* CTA Section */}
-      <section className="py-24 bg-pink relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-64 h-64 bg-pink rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gold rounded-full blur-3xl" />
+      <section className="relative py-24 md:py-32 overflow-hidden isolate">
+        <div className="absolute inset-0 -z-20">
+          <Image
+            src={IMG.heroWedding}
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
         </div>
+        <div className="absolute inset-0 -z-10 bg-gradient-to-br from-pink/85 via-pink-dark/80 to-dark/85" />
         <div className="container mx-auto px-6 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -260,18 +296,18 @@ export default function Home() {
             viewport={{ once: true }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="text-gold font-accent text-3xl">Ready to Celebrate?</span>
+            <span className="text-cream font-accent text-3xl md:text-4xl">Ready to Celebrate?</span>
             <h2 className="text-white mt-2 mb-6">
-              Let&apos;s Make Your Event Unforgettable
+              Let&rsquo;s make your event unforgettable
             </h2>
-            <p className="text-white/80 text-lg mb-8">
-              Tell us about your upcoming celebration and we&apos;ll create a custom bar experience that wows your guests.
+            <p className="text-white/85 text-lg mb-10 leading-relaxed">
+              Tell us about your upcoming celebration and we&apos;ll create a custom bar experience that wows your guests — and lives on in their stories.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link href="/contact" className="btn btn-gold">
-                Get a Quote
+                Reserve Your Date
               </Link>
-              <Link href="/packages" className="btn btn-secondary border-white text-white hover:bg-white hover:text-pink">
+              <Link href="/packages" className="btn btn-ghost">
                 View Packages
               </Link>
             </div>
@@ -280,44 +316,24 @@ export default function Home() {
       </section>
 
       {/* Service Area */}
-      <section className="section bg-white">
+      <section className="section bg-cream">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-2xl mx-auto">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-pink font-accent text-2xl"
-            >
-              Service Area
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="mt-2 mb-6"
-            >
-              Proudly Serving <span className="text-pink">Greater Philadelphia</span>
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="text-muted mb-8"
-            >
+            <span className="eyebrow">Service Area</span>
+            <h2 className="mt-2 mb-6">
+              Proudly serving <span className="gradient-text">Greater Philadelphia</span>
+            </h2>
+            <p className="text-muted mb-10 leading-relaxed">
               Based in Bensalem, PA, we bring our mobile bar experience to events throughout Philadelphia, Bucks County, Montgomery County, and surrounding PA/NJ areas.
-            </motion.p>
+            </p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
               className="flex flex-wrap gap-3 justify-center"
             >
               {["Philadelphia", "Bensalem", "Bucks County", "Montgomery County", "Delaware County", "South Jersey"].map((area) => (
-                <span key={area} className="px-4 py-2 bg-cream rounded-full text-sm text-dark font-medium">
+                <span key={area} className="px-5 py-2.5 bg-white rounded-full text-sm text-dark font-medium shadow-sm">
                   {area}
                 </span>
               ))}
@@ -325,21 +341,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* Marquee Animation Styles */}
-      <style jsx>{`
-        @keyframes marquee {
-          0% {
-            transform: translateX(0);
-          }
-          100% {
-            transform: translateX(-50%);
-          }
-        }
-        .animate-marquee {
-          animation: marquee 20s linear infinite;
-        }
-      `}</style>
     </>
   );
 }

@@ -1,76 +1,107 @@
 @import "tailwindcss";
 
 /* ===================================
-   THE BLOOMING TINI - DESIGN SYSTEM
-   Updated to match actual brand from Instagram
+   THE BLOOMING TINI - DESIGN SYSTEM v2
+   Brand: Pink × Gold × Botanical
    =================================== */
 
-/* CSS Custom Properties */
 :root {
-  /* Primary Colors - from their logo */
+  /* Primary - from logo */
   --pink: #D291BC;
   --pink-light: #E8B4D4;
   --pink-dark: #B577A0;
+  --pink-deep: #8E5C7D;
 
-  /* Gold/Bronze - from "MOBILE BAR" text */
+  /* Gold / Champagne */
   --gold: #C5A059;
   --gold-light: #D4B56A;
   --gold-dark: #A8864A;
 
-  /* Background - cream/soft white like their flyers */
+  /* Botanical Greens (research-spec) */
+  --forest: #2D4739;
+  --forest-light: #3D5A4A;
+  --sage: #9CAF88;
+  --sage-light: #B5C5A4;
+
+  /* Warm Neutrals */
   --cream: #FDF5E6;
   --cream-dark: #F5EBD7;
+  --ivory: #FFFDF9;
+  --mist: #F5F1EA;
   --white: #FFFFFF;
 
-  /* Accent botanicals */
-  --sage: #9CAF88;
+  /* Accents */
   --lavender: #C8A2C8;
   --peach: #FFCBA4;
+  --rose: #E8C5C5;
 
-  /* Text colors */
-  --dark: #3D3D3D;
-  --dark-light: #5A5A5A;
+  /* Text */
+  --dark: #2C2C2C;
+  --dark-light: #4A4A4A;
   --muted: #7A7A7A;
+  --whisper: #B5B5B5;
 
   /* Semantic */
   --background: var(--cream);
   --foreground: var(--dark);
+  --rose: #E8C5C5;
 
-  /* Spacing */
-  --section-padding: clamp(4rem, 8vw, 8rem);
-
-  /* Transitions */
+  /* Motion */
   --transition-fast: 150ms ease;
   --transition-base: 300ms ease;
   --transition-slow: 500ms ease;
+  --transition-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Layout */
+  --section-padding: clamp(4rem, 8vw, 8rem);
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.5rem;
+  --radius-xl: 2rem;
+
+  /* Elevation */
+  --shadow-sm: 0 2px 8px rgba(45, 45, 45, 0.04);
+  --shadow-md: 0 8px 24px rgba(45, 45, 45, 0.08);
+  --shadow-lg: 0 16px 40px rgba(45, 45, 45, 0.10);
+  --shadow-xl: 0 24px 60px rgba(45, 45, 45, 0.14);
+  --shadow-pink: 0 12px 32px rgba(210, 145, 188, 0.35);
+  --shadow-gold: 0 12px 32px rgba(197, 160, 89, 0.30);
 }
 
-/* Tailwind Theme Extension */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-pink: var(--pink);
   --color-pink-light: var(--pink-light);
   --color-pink-dark: var(--pink-dark);
+  --color-pink-deep: var(--pink-deep);
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
   --color-gold-dark: var(--gold-dark);
+  --color-forest: var(--forest);
+  --color-forest-light: var(--forest-light);
+  --color-sage: var(--sage);
+  --color-sage-light: var(--sage-light);
   --color-cream: var(--cream);
   --color-cream-dark: var(--cream-dark);
-  --color-sage: var(--sage);
+  --color-ivory: var(--ivory);
+  --color-mist: var(--mist);
+  --color-rose: var(--rose);
   --color-lavender: var(--lavender);
   --color-peach: var(--peach);
   --color-dark: var(--dark);
   --color-dark-light: var(--dark-light);
   --color-muted: var(--muted);
+  --color-whisper: var(--whisper);
 
-  /* Typography */
-  --font-heading: 'Playfair Display', Georgia, serif;
-  --font-body: 'Inter', system-ui, sans-serif;
-  --font-accent: 'Corinthia', cursive;
+  --font-heading: var(--font-heading), 'Playfair Display', Georgia, serif;
+  --font-body: var(--font-body), 'DM Sans', system-ui, sans-serif;
+  --font-accent: var(--font-accent), 'Corinthia', cursive;
 }
 
-/* Base Styles */
+/* =========================
+   Base
+   ========================= */
 html {
   scroll-behavior: smooth;
 }
@@ -78,45 +109,56 @@ html {
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body);
+  font-family: var(--font-body), 'DM Sans', system-ui, sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--dark);
+@layer base {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading), 'Playfair Display', Georgia, serif;
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--dark);
+  }
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2.5rem, 5.5vw, 4.5rem);
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2rem, 4vw, 3.25rem);
 }
 
 h3 {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
 }
 
-/* Links */
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: color var(--transition-fast);
+p {
+  font-feature-settings: "ss01", "ss02";
 }
 
-/* Buttons - Updated with brand colors */
+@layer base {
+  a {
+    color: inherit;
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+}
+
+/* =========================
+   Buttons
+   ========================= */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -129,17 +171,36 @@ a {
   cursor: pointer;
   border: none;
   font-size: 1rem;
+  letter-spacing: 0.005em;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.25) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+}
+
+.btn:hover::before {
+  transform: translateX(100%);
 }
 
 .btn-primary {
   background: var(--pink);
   color: var(--white);
+  box-shadow: 0 4px 14px rgba(210, 145, 188, 0.25);
 }
 
 .btn-primary:hover {
   background: var(--pink-dark);
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(210, 145, 188, 0.4);
+  box-shadow: var(--shadow-pink);
 }
 
 .btn-secondary {
@@ -151,67 +212,191 @@ a {
 .btn-secondary:hover {
   background: var(--pink);
   color: var(--white);
+  transform: translateY(-2px);
 }
 
 .btn-gold {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
   color: var(--white);
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.25);
 }
 
 .btn-gold:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(197, 160, 89, 0.4);
+  box-shadow: var(--shadow-gold);
 }
 
-/* Container */
-.container {
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+.btn-dark {
+  background: var(--dark);
+  color: var(--white);
 }
 
-/* Section */
+.btn-dark:hover {
+  background: var(--dark-light);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+/* =========================
+   Layout
+   ========================= */
+@layer components {
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .container-narrow {
+    width: 100%;
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
 .section {
   padding: var(--section-padding) 0;
 }
 
-/* Card Styles */
+/* =========================
+   Cards
+   ========================= */
 .card {
   background: var(--white);
-  border-radius: 1.5rem;
+  border-radius: var(--radius-lg);
   padding: 2rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow-sm);
   transition: all var(--transition-base);
 }
 
 .card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-lg);
 }
 
-/* Gradient Text - Pink to Gold like their logo */
+/* =========================
+   Typography Helpers
+   ========================= */
+.eyebrow {
+  color: var(--pink);
+  font-family: var(--font-accent), 'Corinthia', cursive;
+  font-size: clamp(1.5rem, 2.5vw, 2.25rem);
+  line-height: 1;
+  display: inline-block;
+}
+
 .gradient-text {
   background: linear-gradient(135deg, var(--pink) 0%, var(--gold) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  color: transparent;
 }
 
-/* Decorative Elements */
-.floral-accent {
+.gradient-text-rose {
+  background: linear-gradient(135deg, var(--pink-light) 0%, var(--pink-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* =========================
+   Botanical Decorations
+   ========================= */
+.botanical-bg {
   position: relative;
+  isolation: isolate;
 }
 
-.floral-accent::before {
-  content: '✿';
+.botanical-bg::before {
+  content: '';
   position: absolute;
-  font-size: 1rem;
-  color: var(--pink);
-  opacity: 0.6;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23D291BC' stroke-width='0.7' opacity='0.18'%3E%3Cpath d='M100 30c-12 18-12 38 0 56 12-18 12-38 0-56z'/%3E%3Cpath d='M70 100c18-12 38-12 56 0-18 12-38 12-56 0z'/%3E%3Ccircle cx='100' cy='100' r='4'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: -1;
 }
 
-/* Animations */
+.divider-bloom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 0 auto;
+  max-width: 200px;
+}
+
+.divider-bloom::before,
+.divider-bloom::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to var(--dir, right), transparent, var(--pink-light), transparent);
+}
+
+.divider-bloom::after {
+  --dir: left;
+}
+
+/* =========================
+   Form Inputs
+   ========================= */
+.input,
+.textarea,
+.select {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border-radius: var(--radius-md);
+  border: 1.5px solid #E8DFD0;
+  background: var(--white);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--dark);
+  transition: all var(--transition-base);
+  outline: none;
+}
+
+.input:focus,
+.textarea:focus,
+.select:focus {
+  border-color: var(--pink);
+  box-shadow: 0 0 0 4px rgba(210, 145, 188, 0.15);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--whisper);
+}
+
+.field-error {
+  color: #C45B5B;
+  font-size: 0.8125rem;
+  margin-top: 0.375rem;
+}
+
+/* =========================
+   Animations
+   ========================= */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -221,6 +406,16 @@ a {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
 
@@ -236,15 +431,79 @@ a {
   }
 }
 
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+
+  100% {
+    transform: scale(1.15) translate(-2%, -1%);
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease forwards;
 }
 
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
 
-/* Responsive utilities */
+.animate-ken-burns {
+  animation: kenBurns 20s ease-in-out infinite alternate;
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+.animate-pulse-ring {
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* Skeleton shimmer */
+.skeleton {
+  background: linear-gradient(90deg, var(--mist) 0%, var(--cream-dark) 50%, var(--mist) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
 
   *,
@@ -254,17 +513,55 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+
+  html {
+    scroll-behavior: auto;
+  }
 }
 
-/* Glass effect */
+/* =========================
+   Utilities
+   ========================= */
 .glass {
-  background: rgba(255, 255, 255, 0.9);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+}
+
+.glass-dark {
+  background: rgba(44, 44, 44, 0.55);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 /* Selection */
 ::selection {
   background: var(--pink-light);
   color: var(--dark);
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Image fade-in helper for next/image with placeholder */
+.img-fade {
+  opacity: 0;
+  transition: opacity 600ms ease;
+}
+
+.img-fade.loaded {
+  opacity: 1;
 }

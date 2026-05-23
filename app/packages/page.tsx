@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import Hero from "@/components/Hero";
 import PackageCard from "@/components/PackageCard";
+import QuoteCalculator from "@/components/QuoteCalculator";
 import Link from "next/link";
+import { IMG } from "@/lib/images";
 
 export const metadata: Metadata = {
     title: "Packages & Pricing | The Blooming Tini",
@@ -76,8 +78,11 @@ export default function PackagesPage() {
                 title="Packages & Pricing"
                 subtitle="Investment"
                 description="Transparent pricing for exceptional service. Choose the package that fits your celebration."
+                backgroundImage={IMG.heroBar}
                 height="medium"
             />
+
+            <QuoteCalculator />
 
             {/* Packages */}
             <section className="section bg-cream">
@@ -124,19 +129,19 @@ export default function PackagesPage() {
                         </h3>
                         <ul className="text-white/80 text-left space-y-3 max-w-xl mx-auto">
                             <li className="flex items-start gap-3">
-                                <span className="text-gold">✿</span>
+                                <span className="text-white">✿</span>
                                 <span>Prices are estimates — your custom quote may vary based on event details</span>
                             </li>
                             <li className="flex items-start gap-3">
-                                <span className="text-gold">✿</span>
+                                <span className="text-white">✿</span>
                                 <span>Travel fees may apply for events outside our primary service area</span>
                             </li>
                             <li className="flex items-start gap-3">
-                                <span className="text-gold">✿</span>
+                                <span className="text-white">✿</span>
                                 <span>All packages require a 50% deposit to secure your date</span>
                             </li>
                             <li className="flex items-start gap-3">
-                                <span className="text-gold">✿</span>
+                                <span className="text-white">✿</span>
                                 <span>A 20% gratuity is customary but not included in pricing</span>
                             </li>
                         </ul>
