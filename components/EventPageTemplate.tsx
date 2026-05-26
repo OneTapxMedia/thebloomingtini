@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import Hero from "@/components/Hero";
 import { IMG } from "@/lib/images";
+import JsonLd from "@/components/JsonLd";
 
 export type EventPageData = {
     slug: string;
@@ -41,8 +42,65 @@ const Check = (
 );
 
 export default function EventPageTemplate({ data }: { data: EventPageData }) {
+    const url = `https://thebloomingtini.com/services/${data.slug}`;
+
+    // Service schema — tells search/AI exactly what this offering is.
+    const serviceSchema = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: data.title,
+        serviceType: `${data.eyebrow} Bartending`,
+        description: data.description,
+        url,
+        image: data.heroImage,
+        provider: {
+            "@type": "LocalBusiness",
+            "@id": "https://thebloomingtini.com",
+            name: "The Blooming Tini",
+        },
+        areaServed: [
+            { "@type": "City", name: "Philadelphia" },
+            { "@type": "City", name: "Bensalem" },
+            { "@type": "AdministrativeArea", name: "Bucks County" },
+            { "@type": "AdministrativeArea", name: "South Jersey" },
+        ],
+        offers: {
+            "@type": "Offer",
+            url: `${url}#pricing`,
+            priceCurrency: "USD",
+            price: data.pricing.startingAt.replace(/[^0-9]/g, ""),
+            availability: "https://schema.org/InStock",
+            description: `${data.pricing.package}. ${data.pricing.details}`,
+        },
+    };
+
+    // FAQPage schema per event page
+    const eventFaqSchema = data.faqs.length > 0 ? {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: data.faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+        })),
+    } : null;
+
+    // BreadcrumbList — gives search engines navigation context
+    const breadcrumbSchema = {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://thebloomingtini.com" },
+            { "@type": "ListItem", position: 2, name: "Services", item: "https://thebloomingtini.com/services" },
+            { "@type": "ListItem", position: 3, name: data.eyebrow, item: url },
+        ],
+    };
+
     return (
         <>
+            <JsonLd data={serviceSchema} />
+            {eventFaqSchema && <JsonLd data={eventFaqSchema} />}
+            <JsonLd data={breadcrumbSchema} />
             <Hero
                 title={data.title}
                 subtitle={data.eyebrow}

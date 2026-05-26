@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { IMG } from "@/lib/images";
+import JsonLd from "@/components/JsonLd";
 
 const faqs = [
     {
@@ -98,8 +99,26 @@ export default function FAQPage() {
         );
     };
 
+    // Schema.org FAQPage — flattens nested categories so AI engines + Google
+    // can extract every Q/A as a discrete answer.
+    const faqSchema = {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqs.flatMap((cat) =>
+            cat.questions.map((q) => ({
+                "@type": "Question",
+                name: q.q,
+                acceptedAnswer: {
+                    "@type": "Answer",
+                    text: q.a,
+                },
+            }))
+        ),
+    };
+
     return (
         <>
+            <JsonLd data={faqSchema} />
             <Hero
                 title="FAQ"
                 subtitle="Questions?"

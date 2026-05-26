@@ -7,6 +7,13 @@ import { IMG } from "@/lib/images";
 export const metadata: Metadata = {
     title: "Services | The Blooming Tini",
     description: "Professional mobile bartending services for weddings, corporate events, private parties, and special occasions in Philadelphia and surrounding areas.",
+    alternates: { canonical: "https://thebloomingtini.com/services" },
+    openGraph: {
+        title: "Services — Weddings, Showers, Corporate, Wellness & More",
+        description: "From the Bloom Bar to the Matcha Bar, we pour for every celebration in PA & NJ.",
+        url: "https://thebloomingtini.com/services",
+        images: [IMG.weddingTable],
+    },
 };
 
 const services = [

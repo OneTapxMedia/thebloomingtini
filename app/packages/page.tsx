@@ -4,10 +4,18 @@ import PackageCard from "@/components/PackageCard";
 import QuoteCalculator from "@/components/QuoteCalculator";
 import Link from "next/link";
 import { IMG } from "@/lib/images";
+import JsonLd from "@/components/JsonLd";
 
 export const metadata: Metadata = {
     title: "Packages & Pricing | The Blooming Tini",
     description: "View our mobile bartending packages and pricing. Choose from Essential, Premium, or Luxe tiers for your Philadelphia area event.",
+    alternates: { canonical: "https://thebloomingtini.com/packages" },
+    openGraph: {
+        title: "Mobile Bar Packages — Essential, Premium, Luxe",
+        description: "Transparent pricing for mobile bartending services in Philadelphia, Bensalem, and South Jersey.",
+        url: "https://thebloomingtini.com/packages",
+        images: [IMG.heroBar],
+    },
 };
 
 const packages = [
@@ -72,8 +80,53 @@ const addons = [
 ];
 
 export default function PackagesPage() {
+    // Schema.org OfferCatalog — gives AI engines structured pricing they
+    // can quote directly ("Their Essential package starts at $350...").
+    const offerCatalogSchema = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        serviceType: "Mobile Bartending",
+        provider: {
+            "@type": "LocalBusiness",
+            "@id": "https://thebloomingtini.com",
+            name: "The Blooming Tini",
+        },
+        areaServed: [
+            "Philadelphia, PA",
+            "Bensalem, PA",
+            "Bucks County, PA",
+            "Montgomery County, PA",
+            "Delaware County, PA",
+            "South Jersey",
+        ],
+        hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Mobile Bar Packages",
+            itemListElement: packages.map((pkg, i) => ({
+                "@type": "Offer",
+                position: i + 1,
+                name: pkg.name,
+                description: pkg.description,
+                price: pkg.price.replace(/[^0-9]/g, ""),
+                priceCurrency: "USD",
+                priceSpecification: {
+                    "@type": "PriceSpecification",
+                    price: pkg.price.replace(/[^0-9]/g, ""),
+                    priceCurrency: "USD",
+                    description: `${pkg.name} package — ${pkg.priceNote}`,
+                },
+                itemOffered: {
+                    "@type": "Service",
+                    name: `${pkg.name} Mobile Bar Package`,
+                    description: pkg.features.join(" · "),
+                },
+            })),
+        },
+    };
+
     return (
         <>
+            <JsonLd data={offerCatalogSchema} />
             <Hero
                 title="Packages & Pricing"
                 subtitle="Investment"

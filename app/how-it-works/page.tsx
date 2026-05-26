@@ -4,6 +4,7 @@ import Hero from "@/components/Hero";
 import { IMG } from "@/lib/images";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import JsonLd from "@/components/JsonLd";
 
 const steps = [
     {
@@ -53,8 +54,26 @@ const timeline = [
 ];
 
 export default function HowItWorksPage() {
+    // Schema.org HowTo — surfaces the booking process in voice + AI answers.
+    const howToSchema = {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: "How to Book The Blooming Tini Mobile Bartending",
+        description:
+            "Step-by-step booking process for The Blooming Tini's mobile bar service for weddings, showers, corporate events, and private parties in Philadelphia and South Jersey.",
+        totalTime: "P1D",
+        step: steps.map((s, i) => ({
+            "@type": "HowToStep",
+            position: i + 1,
+            name: s.title,
+            text: s.description,
+            url: `https://thebloomingtini.com/how-it-works#step-${i + 1}`,
+        })),
+    };
+
     return (
         <>
+            <JsonLd data={howToSchema} />
             <Hero
                 title="How It Works"
                 subtitle="The Process"

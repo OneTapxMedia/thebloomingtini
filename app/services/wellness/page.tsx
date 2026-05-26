@@ -7,9 +7,11 @@ const data = EVENTS.wellness;
 export const metadata: Metadata = {
     title: "Matcha Bar & Wellness Event Catering | The Blooming Tini",
     description: data.description,
+    alternates: { canonical: `https://thebloomingtini.com/services/${data.slug}` },
     openGraph: {
         title: data.title,
         description: data.description,
+        url: `https://thebloomingtini.com/services/${data.slug}`,
         images: [data.heroImage],
     },
 };

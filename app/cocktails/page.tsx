@@ -8,6 +8,13 @@ export const metadata: Metadata = {
     title: "The Menu | Blooming Brunch & Signature Cocktails",
     description:
         "Explore The Blooming Tini's signature menus — Blooming Brunch, custom event pours, matcha & wellness drinks. Every menu is built around your story.",
+    alternates: { canonical: "https://thebloomingtini.com/cocktails" },
+    openGraph: {
+        title: "Signature Cocktails & Brunch Menu",
+        description: "Blooming Brunch · Signature Blooms · Matcha Bar — all crafted custom for your event.",
+        url: "https://thebloomingtini.com/cocktails",
+        images: [IMG.heroFlight],
+    },
 };
 
 type Cocktail = {
