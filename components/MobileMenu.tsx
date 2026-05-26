@@ -41,7 +41,7 @@ export default function MobileMenu({ isOpen, onClose, items, currentPath }: Mobi
 
                     {/* Content */}
                     <div className="relative h-full flex flex-col pt-24 overflow-y-auto overscroll-contain"
-                        style={{ paddingBottom: "calc(13rem + env(safe-area-inset-bottom))" }}
+                        style={{ paddingBottom: "calc(11rem + env(safe-area-inset-bottom))" }}
                     >
                         <div className="container mx-auto px-6 flex-1">
                             <motion.div
@@ -195,24 +195,14 @@ export default function MobileMenu({ isOpen, onClose, items, currentPath }: Mobi
                                 <Link href="/contact" onClick={onClose} className="btn btn-primary w-full">
                                     Plan Your Event
                                 </Link>
-                                <div className="flex gap-3">
-                                    <a
-                                        href={LINKS.honeybook}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex-1 btn btn-secondary text-xs py-2.5"
-                                    >
-                                        Open HoneyBook
-                                    </a>
-                                    <a
-                                        href={LINKS.instagram}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="flex-1 btn btn-dark text-xs py-2.5"
-                                    >
-                                        @thebloomingtini
-                                    </a>
-                                </div>
+                                <a
+                                    href={LINKS.instagram}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="btn btn-secondary w-full text-xs py-2.5"
+                                >
+                                    Follow @thebloomingtini
+                                </a>
                             </div>
                         </motion.div>
                     </div>

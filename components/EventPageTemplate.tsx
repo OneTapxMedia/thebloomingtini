@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import Hero from "@/components/Hero";
-import { IMG, LINKS } from "@/lib/images";
+import { IMG } from "@/lib/images";
 
 export type EventPageData = {
     slug: string;
@@ -53,14 +53,9 @@ export default function EventPageTemplate({ data }: { data: EventPageData }) {
                 <Link href="/contact" className="btn btn-gold">
                     Plan Your Event
                 </Link>
-                <a
-                    href={LINKS.honeybook}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-ghost"
-                >
-                    Book via HoneyBook
-                </a>
+                <Link href="/packages" className="btn btn-ghost">
+                    View Packages
+                </Link>
             </Hero>
 
             {/* Intro */}
@@ -342,16 +337,11 @@ export default function EventPageTemplate({ data }: { data: EventPageData }) {
                     </p>
                     <div className="flex flex-wrap gap-4 justify-center">
                         <Link href="/contact" className="btn btn-primary">
-                            Get a quote
+                            Reserve Your Date
                         </Link>
-                        <a
-                            href={LINKS.honeybook}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="btn btn-secondary"
-                        >
-                            Open HoneyBook
-                        </a>
+                        <Link href={`/services/${data.slug}#gallery`} className="btn btn-secondary">
+                            See more {data.eyebrow.toLowerCase()}
+                        </Link>
                     </div>
                 </div>
             </section>

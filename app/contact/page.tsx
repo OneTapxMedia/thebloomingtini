@@ -7,7 +7,7 @@ import { z } from "zod";
 import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Hero from "@/components/Hero";
-import { IMG, LINKS } from "@/lib/images";
+import { IMG } from "@/lib/images";
 
 const eventTypes = [
     "Wedding",
@@ -344,28 +344,6 @@ function ContactInner() {
                             transition={{ delay: 0.15 }}
                             className="space-y-6"
                         >
-                            {/* HoneyBook Quick Book */}
-                            <div className="bg-gradient-to-br from-pink to-pink-dark rounded-2xl p-6 text-white shadow-lg">
-                                <p className="text-xs uppercase tracking-[0.2em] text-cream mb-2 font-medium">Prefer to skip the form?</p>
-                                <h4 className="font-heading text-xl mb-3">
-                                    Book through our portal
-                                </h4>
-                                <p className="text-white/85 text-sm mb-5 leading-relaxed">
-                                    Use our HoneyBook inquiry form for a full guided experience &mdash; same response time, more details collected up front.
-                                </p>
-                                <a
-                                    href={LINKS.honeybook}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center gap-2 w-full px-4 py-3 rounded-full bg-white text-pink-dark text-sm font-semibold hover:bg-cream transition-colors"
-                                >
-                                    Open HoneyBook
-                                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                    </svg>
-                                </a>
-                            </div>
-
                             <div className="bg-white rounded-2xl p-6 shadow-sm">
                                 <h4 className="font-heading font-semibold text-dark mb-2 flex items-center gap-2">
                                     <span className="text-pink">⏱</span> Response time
